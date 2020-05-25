@@ -1,12 +1,31 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-      Hello from Facelets
+        <h:form>
+            <p:panelGrid columns="2" >
+                <f:facet name="header" >
+                    Ingrese los datos del artista 
+                </f:facet>
+
+                <h:outputLabel  value="Nombre:"  />
+                <p:inputText id="nombre" value="#{inicio.artistaFormulario.nombre}" />
+
+                <h:outputLabel  value="Pais" />
+                <p:inputText id="pais" value="#{inicio.artistaFormulario.pais}" />
+                
+                <h:outputLabel  value="Fecha Nacimiento" />
+                <p:inputText id="fechaNacimiento" value="#{inicio.artistaFormulario.fechaNacimiento}" />
+            </p:panelGrid>
+            <p:commandButton actionListener="#{inicio.insertarArtista()}" value="Insertar">
+            </p:commandButton>  
+        </h:form>
     </h:body>
 </html>
 

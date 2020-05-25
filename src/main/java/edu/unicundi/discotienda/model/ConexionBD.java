@@ -5,10 +5,47 @@
  */
 package edu.unicundi.discotienda.model;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Luz
  */
 public class ConexionBD {
+
+    Connection conexion;
+
+    public ConexionBD() {
+    }
+
+    public ConexionBD(Connection conexion) {
+        this.conexion = conexion;
+    }
     
+    /**
+     * Metodo que se encarga de ralizar la conexion a la base de datos
+     * @throws SQLException 
+     */
+    public void conectarBaseDatos() throws SQLException {
+        String usuario = "postgres";
+        String contrasena = "admin";
+        String nombreDB = "discotienda";
+        String cadenaConexion = "jdbc:postgresql://localhost:5434/" + nombreDB;
+
+        try {
+            Class.forName("org.postgresql.Driver");
+            this.conexion = DriverManager.getConnection(cadenaConexion, usuario, contrasena);
+            System.out.println("La Conexion se realizo correctamente");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public Connection getConexion(){
+        return this.conexion;
+    }
 }
