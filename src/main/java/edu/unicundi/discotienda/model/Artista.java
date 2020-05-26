@@ -20,8 +20,16 @@ public class Artista {
     private String pais;
 
     private String fechaNacimiento;
+    
+    public Artista(){
+    
+    }
 
-    public Artista() {
+    public Artista(int id, String nombre, String pais, String fechaNacimiento) {
+      this.id=id;
+      this.nombre=nombre;
+      this.pais=pais;
+      this.fechaNacimiento=fechaNacimiento;
     }
 
     public Integer getId() {

@@ -6,12 +6,14 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
+                   
     </h:head>
     <h:body>
         <h:form>
             <p:panelGrid columns="2" >
                 <f:facet name="header" >
                     Ingrese los datos del artista 
+         
                 </f:facet>
 
                 <h:outputLabel  value="Nombre:"  />
@@ -19,13 +21,78 @@
 
                 <h:outputLabel  value="Pais" />
                 <p:inputText id="pais" value="#{inicio.artistaFormulario.pais}" />
-                
+
                 <h:outputLabel  value="Fecha Nacimiento" />
                 <p:inputText id="fechaNacimiento" value="#{inicio.artistaFormulario.fechaNacimiento}" />
             </p:panelGrid>
-            <p:commandButton actionListener="#{inicio.insertarArtista()}" value="Insertar">
+            <p:commandButton actionListener="#{inicio.insertarArtista()}" value="Insertar" update=":formularioArtista">
             </p:commandButton>  
         </h:form>
+
+        <h:form id="formularioArtista">
+            <p:growl id="msg" showDetail="true" /> 
+           
+            <p:dataTable var="artista" value="#{inicio.listaArtista}" editable="true">
+                <f:facet name="header">
+                    Lista de artistas
+                     #{datos.listar()}
+                </f:facet>
+                <p:ajax event="rowEdit" listener="#{datos.actualizar}" update=":formularioArtista:msg"/>
+                <p:ajax event="rowEditCancel" listener="#{datos.cancelar}" update=":formularioArtista:msg"/>
+
+                <p:column headerText="Id">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{artista.id}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{artista.id}"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Nombre">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{artista.nombre}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{artista.nombre}"/>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Pais">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{artista.pais}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{artista.pais}"/>
+                        </f:facet>
+                    </p:cellEditor>
+
+                </p:column>
+
+                <p:column headerText="Fecha de nacimiento">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{artista.fechaNacimiento}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <p:inputText value="#{artista.fechaNacimiento}"/>
+                        </f:facet>
+                    </p:cellEditor>
+
+                </p:column>
+
+                <p:column headerText="Modificar">
+                    <p:rowEditor/>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+
     </h:body>
 </html>
 

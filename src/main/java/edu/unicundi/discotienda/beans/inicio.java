@@ -7,9 +7,14 @@ package edu.unicundi.discotienda.beans;
 
 import edu.unicundi.discotienda.beans.logica.Datos;
 import edu.unicundi.discotienda.model.Artista;
+import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -17,11 +22,15 @@ import javax.enterprise.context.RequestScoped;
  */
 @Named(value = "inicio")
 @RequestScoped
-public class inicio {
+public class inicio  implements Serializable {
 
+    private List<Artista> listaArtista;
     private Artista artistaFormulario;
     private Datos datos;
-
+   
+    @Inject
+    private Datos service;
+ 
     /**
      * Creates a new instance of inicio
      */
@@ -30,6 +39,7 @@ public class inicio {
     
     @PostConstruct
     public void inicio() {
+        this.listaArtista = service.getListaArtista();
         datos = new Datos();
         artistaFormulario = new Artista();
     }
@@ -37,7 +47,7 @@ public class inicio {
     public void insertarArtista() {
         this.datos.insertar(artistaFormulario);
     }
-
+    
     public Artista getArtistaFormulario() {
         return artistaFormulario;
     }
@@ -52,6 +62,14 @@ public class inicio {
 
     public void setDatos(Datos datos) {
         this.datos = datos;
+    }
+
+    public List<Artista> getListaArtista() {
+        return listaArtista;
+    }
+
+    public void setListaArtista(List<Artista> listaArtista) {
+        this.listaArtista = listaArtista;
     }
 
 }
