@@ -6,10 +6,10 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
-                   
+              #{datos.listar()}        
     </h:head>
     <h:body>
-        <h:form>
+          <h:form id="formularioArtista">
             <p:panelGrid columns="2" >
                 <f:facet name="header" >
                     Ingrese los datos del artista 
@@ -25,17 +25,15 @@
                 <h:outputLabel  value="Fecha Nacimiento" />
                 <p:inputText id="fechaNacimiento" value="#{inicio.artistaFormulario.fechaNacimiento}" />
             </p:panelGrid>
-            <p:commandButton actionListener="#{inicio.insertarArtista()}" value="Insertar" update=":formularioArtista">
+            <p:commandButton action="#{inicio.insertarArtista()}" value="Insertar">
             </p:commandButton>  
-        </h:form>
 
-        <h:form id="formularioArtista">
             <p:growl id="msg" showDetail="true" /> 
            
             <p:dataTable var="artista" value="#{inicio.listaArtista}" editable="true">
                 <f:facet name="header">
                     Lista de artistas
-                     #{datos.listar()}
+                  
                 </f:facet>
                 <p:ajax event="rowEdit" listener="#{datos.actualizar}" update=":formularioArtista:msg"/>
                 <p:ajax event="rowEditCancel" listener="#{datos.cancelar}" update=":formularioArtista:msg"/>

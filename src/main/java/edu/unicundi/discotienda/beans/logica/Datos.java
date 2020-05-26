@@ -31,7 +31,7 @@ import org.primefaces.event.RowEditEvent;
  * @author Luz
  */
 @Named(value = "datos")
-@SessionScoped
+@ViewScoped
 public class Datos implements Serializable {
 
     Connection conexion;
@@ -84,27 +84,27 @@ public class Datos implements Serializable {
         }
     
     public void actualizar(RowEditEvent event){
-        Artista c = (Artista) event.getObject();
+        Artista datosArtista = (Artista) event.getObject();
         PreparedStatement prepararSentencia = null;
         try {
-            String cadenaSql = "UPDATE public.artista SET nombre_artista='"+c.getNombre()+"',pais_artista='"+c.getPais()+"',fecha_nacimiento='"+c.getFechaNacimiento()+"' WHERE id_artista="+c.getId()+";";
+            String cadenaSql = "UPDATE public.artista SET nombre_artista='"+datosArtista.getNombre()+"',pais_artista='"+datosArtista.getPais()+"',fecha_nacimiento='"+datosArtista.getFechaNacimiento()+"' WHERE id_artista="+datosArtista.getId()+";";
             prepararSentencia = this.conexion.prepareStatement(cadenaSql);
             prepararSentencia.executeUpdate();
-            FacesMessage message = new FacesMessage("Editó el carro con id: " + c.getId());
+            FacesMessage message = new FacesMessage("Editó el carro con id: " + datosArtista.getId());
         } catch (Exception e) {
 
         }
 
     }
 
-    public void cancelar(RowEditEvent event){
-        Artista c = (Artista) event.getObject();
+    public void cancelar(RowEditEvent event)  {
+        Artista datosArtista = (Artista) event.getObject();
         PreparedStatement prepararSentencia = null;
         try {
-            String cadenaSql = "DELETE FROM public.artista WHERE id_artista" + "=" + c.getId() + ";";
+            String cadenaSql = "DELETE FROM public.artista WHERE id_artista" + "=" + datosArtista.getId() + ";";
             prepararSentencia = this.conexion.prepareStatement(cadenaSql);
             prepararSentencia.executeUpdate();
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Se Elimino" + c.getId()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Se Elimino" + datosArtista.getId()));
         } catch (Exception e) {
 
         }
