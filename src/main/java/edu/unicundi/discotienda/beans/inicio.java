@@ -8,13 +8,18 @@ package edu.unicundi.discotienda.beans;
 import edu.unicundi.discotienda.beans.logica.Datos;
 import edu.unicundi.discotienda.model.Artista;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -22,46 +27,65 @@ import javax.inject.Inject;
  */
 @Named(value = "inicio")
 @RequestScoped
-public class inicio  implements Serializable {
+public class inicio implements Serializable {
 
     private List<Artista> listaArtista;
     private Artista artistaFormulario;
-    private Datos datos;
-   
+
     @Inject
     private Datos service;
- 
+
     /**
      * Creates a new instance of inicio
      */
     public inicio() {
     }
-    
+
     @PostConstruct
     public void inicio() {
+        listarArtista();
         this.listaArtista = service.getListaArtista();
-        datos = new Datos();
         artistaFormulario = new Artista();
     }
 
     public void insertarArtista() {
-        this.datos.insertar(artistaFormulario);
+        String cadenaSql = "INSERT INTO public.artista(id_artista, nombre_artista, pais_artista, fecha_nacimiento)" 
+                 + "VALUES ((SELECT MAX(id_artista)+1 as id_artista FROM public.artista)," + "'" + artistaFormulario.getNombre() + "'," + "'" + artistaFormulario.getPais() + "'" + ",'" + "04/05/1849" + "');";   
+//                    "INSERT INTO public.artista(id_artista, nombre_artista, pais_artista, fecha_nacimiento)"
+//                    + "VALUES  ((SELECT MAX(id_artista)+1 as id_artista FROM public.artista),'" + artista.getNombre() + "','" + artista.getPais() + "','1959-08-11')";
+        FacesMessage message = new FacesMessage("Se inserto correctamente");
+        service.modifacionBaseDatos(cadenaSql, message);
+    }
+
+    public void listarArtista(){
+        try {
+            service.listar();
+        } catch (SQLException ex) {
+            Logger.getLogger(inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
+    
+    public void actualizarArtista(RowEditEvent event){
+        Artista datosArtista = (Artista) event.getObject();
+        String cadenaSql = "UPDATE public.artista SET nombre_artista='"+datosArtista.getNombre()+"',pais_artista='"+datosArtista.getPais()+"',fecha_nacimiento='"+datosArtista.getFechaNacimiento()+"' WHERE id_artista="+datosArtista.getId()+";";
+        FacesMessage message = new FacesMessage("Editó el asrtista con id: " + datosArtista.getId());
+        service.modifacionBaseDatos(cadenaSql, message);
+    }
+    
+    public void eliminarArtista(RowEditEvent event)  {
+        Artista datosArtista = (Artista) event.getObject();
+        String cadenaSql = "DELETE FROM public.artista WHERE id_artista" + "=" + datosArtista.getId() + ";";
+        FacesMessage message = new FacesMessage("Se Elimino el artista: " + datosArtista.getId());
+        service.modifacionBaseDatos(cadenaSql, message);
+    }
+
     public Artista getArtistaFormulario() {
         return artistaFormulario;
     }
 
     public void setArtistaFormulario(Artista artistaFormulario) {
         this.artistaFormulario = artistaFormulario;
-    }
-
-    public Datos getDatos() {
-        return datos;
-    }
-
-    public void setDatos(Datos datos) {
-        this.datos = datos;
     }
 
     public List<Artista> getListaArtista() {
