@@ -15,7 +15,8 @@
         </style>
         <h:form id="formularioArtista">
             <p:growl id="msg" showDetail="true"/> 
-            <p:dataTable id="tablaArtista" var="artista" value="#{inicio.listaArtista}" editable="true" rendered="true"
+            <p:dataTable id="tablaArtista" var="artista" value="#{inicio.listaArtista}" rows="5"
+                         editable="true" rendered="true"
                          paginator="true"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords}"
@@ -78,6 +79,7 @@
                 </p:column>
 
             </p:dataTable>
+            
 
             <br></br>
 

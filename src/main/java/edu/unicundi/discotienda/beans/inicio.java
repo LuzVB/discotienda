@@ -5,7 +5,7 @@
  */
 package edu.unicundi.discotienda.beans;
 
-import edu.unicundi.discotienda.beans.logica.Datos;
+import edu.unicundi.discotienda.beans.logica.DatosArtista;
 import edu.unicundi.discotienda.model.Artista;
 import java.io.Serializable;
 import java.sql.SQLException;
@@ -15,9 +15,8 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.view.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import org.primefaces.event.RowEditEvent;
 
@@ -33,11 +32,9 @@ public class inicio implements Serializable {
     private Artista artistaFormulario;
 
     @Inject
-    private Datos service;
+    private DatosArtista service;
 
-    /**
-     * Creates a new instance of inicio
-     */
+   
     public inicio() {
     }
 
@@ -79,6 +76,11 @@ public class inicio implements Serializable {
         FacesMessage message = new FacesMessage("Se Elimino el artista: " + datosArtista.getId());
         service.modifacionBaseDatos(cadenaSql, message);
     }
+    
+    public void cancelar(RowEditEvent event) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cancelar"));
+    }
+    
 
     public Artista getArtistaFormulario() {
         return artistaFormulario;
