@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Inicio Sesion</title>
+        <style type="text/css">
+            .bodyInicio{
+                padding-top: 8.5%;
+                padding-bottom: 6.7%;
+                background: rgb(104,92,120);
+                background: linear-gradient(0deg, rgba(104,92,120,1) 0%, rgba(255,255,255,1) 100%);
+                font-family: Verdana;
+            }
+            .toggleable div {
+                background-color: #FAC299;
+            }
+            .ui-g div {
+                text-align: center;
+            }
+            .imagen{
+            }
+            .inicio{
+                background-color: #ffffff;
+                box-shadow: 2px 2px 10px #666; 
+                border: 1px solid #ffffff;
+                margin-left:4%; 
+                padding: 2%;
+
+            }
+        </style>
+    </h:head>
+    <h:body class="bodyInicio">
+        <h:form>
+            <p:growl id="growl" showDetail="true" sticky="true" /> 
+            <div class="ui-g">
+                <div class="ui-g-4"></div>
+                <div class="ui-g-4"><p:graphicImage url="resources/logo3.png" width="45%" /></div>
+                <div class="ui-g-4"></div>
+            </div>
+            <div class="ui-g">
+                <div class="ui-g-4"></div>
+                <div class="inicio"> <h3>Inicio Sesion</h3>
+                    <h:panelGrid columns="2" style="">
+                        <h:outputLabel  value="Usuario"  />
+                        <p:inputText id="nombre" value="#{inicioSesion.adminInicio.usuarioAdmin}" 
+                                     label="Usuario"
+                                     required="true"/>
+
+                        <h:outputLabel  value="Contraseña"  />
+                        <p:password id="nonFeedback" value="#{inicioSesion.adminInicio.contrasenaAdmin}" 
+                                    label="Contraseña"
+                                    required="true"/>
+
+                    </h:panelGrid>
+                    <p:commandButton actionListener="#{inicioSesion.confirmarAdministrador()}" value="Ingresar" icon="pi pi-unlock" update="@form"/>   
+                    <p:button outcome="index" value="Comprar" icon="pi pi-shopping-cart"  /> </div>
+                <div class="ui-g-4"></div>
+            </div>
+        </h:form>
+    </h:body>
+</html>
+
