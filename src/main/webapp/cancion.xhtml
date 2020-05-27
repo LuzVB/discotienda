@@ -91,22 +91,21 @@
             <br></br> 
             
             <br></br> 
-             <p:panel id="toggleable" header="Ingrese los datos de la cancion" toggleable="true" toggleSpeed="500" > 
- 
+            <p:panel id="toggleable" header="Ingrese los datos de la cancion" toggleable="true" toggleSpeed="500" > 
+                <p:growl id="msgs" showDetail="true"/>  
                 <h:panelGrid columns="2" class="panel"> 
+     
                     <h:outputLabel value="Nombre cancion:" for="itNombreAlbum"  /> 
                     <p:inputText id="itNombreAlbum" value="#{cancion.cancionFormulario.nombreCancion}" required="true" label="Nombre"/> 
                     <p:message for="itNombreAlbum" />  
                      
-                    <h:outputText value="#{cancion.cancionFormulario.nombreAlbum}"/> 
                     <h:outputLabel  value="Nombre Album: " /> 
                     <p:selectOneMenu value="#{cancion.cancionFormulario.nombreAlbum}" style="width:100%"> 
                            <f:selectItems value ="#{cancion.listaAlbum}" var="nomalbum" itemValue="#{nomalbum.idAlbum}" itemLabel="#{nomalbum.nombreAlbum}" /> 
                     </p:selectOneMenu> 
  
-                    <p:outputLabel  value="Duracion min:"/>
+                    <p:outputLabel  value="Duracion (min):"/>
                     <h:selectOneMenu id="itDuracion" value="#{cancion.cancionFormulario.duracionCancion}" style="width:100%">
-                        
                         <f:selectItem itemValue ="3:00" itemLabel ="3:00" />
                         <f:selectItem itemValue ="3:30" itemLabel ="3:30" />
                         <f:selectItem itemValue ="4:00" itemLabel ="4:00" />                            
@@ -114,16 +113,16 @@
                         <f:selectItem itemValue ="5:00" itemLabel ="5:00" /> 
                         <f:selectItem itemValue ="5:30" itemLabel ="5:30" /> 
                     </h:selectOneMenu>  
-                
-                    <h:outputLabel value="Precio" for="itNumero"  /> 
+                    
+                    <h:outputLabel value="Precio ($):" for="itNumero"  /> 
                     <p:inputText type="number" id="itNumero" value="#{cancion.cancionFormulario.precioCancion}" required="true" label="Precio" > 
-                        <f:validateDoubleRange minimum="1" maximum="900000" /> 
+                        <f:validateDoubleRange minimum="5"  /> 
                     </p:inputText> 
                     <p:message for="itNumero" />  
  
  
                     <br></br> 
-                    <p:commandButton actionListener="#{cancion.insertarCancion()}" value="Insertar" update="tablaAlbum" validateClient="true" />     
+                    <p:commandButton actionListener="#{cancion.insertarCancion()}" value="Insertar" update="formularioCancion,msgs" validateClient="true" />     
                 </h:panelGrid> 
  
             </p:panel>

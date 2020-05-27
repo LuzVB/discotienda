@@ -41,7 +41,8 @@
                             <h:outputText value="#{artista.nombreAlbum}" /> 
                         </f:facet> 
                         <f:facet name="input"> 
-                            <p:inputText value="#{artista.nombreAlbum}"/> 
+   
+                            <p:inputText id="itNombreAlbum" value="#{artista.nombreAlbum}" required="true" label="Nombre"/> 
                         </f:facet> 
                     </p:cellEditor> 
                 </p:column> 
@@ -80,7 +81,16 @@
                             <h:outputText value="#{artista.formatoAlbum}" /> 
                         </f:facet> 
                         <f:facet name="input"> 
-                            <p:inputText value="#{artista.formatoAlbum}"/> 
+                        <h:selectOneMenu id="formato" value="#{artista.formatoAlbum}" style="width:100%">
+                        
+                        <f:selectItem itemValue ="MP3" itemLabel ="MP3" />
+                        <f:selectItem itemValue ="WAV" itemLabel ="WAV" />
+                        <f:selectItem itemValue ="AIFF" itemLabel ="AIFF" />                            
+                        <f:selectItem itemValue ="WMA" itemLabel ="WMA" />  
+                        <f:selectItem itemValue ="OGG" itemLabel ="OGG" /> 
+                        <f:selectItem itemValue ="FLAC" itemLabel ="FLAC" /> 
+                    </h:selectOneMenu> 
+
                         </f:facet> 
                     </p:cellEditor> 
  
@@ -104,7 +114,9 @@
                             <h:outputText value="#{artista.precioAlbum}" /> 
                         </f:facet> 
                         <f:facet name="input"> 
-                            <p:inputText value="#{artista.precioAlbum}"/> 
+                            <p:inputText type="number" id="itNumero" value="#{artista.precioAlbum}" required="true" label="Precio" > 
+                                  <f:validateDoubleRange minimum="5"  /> 
+                            </p:inputText> 
                         </f:facet> 
                     </p:cellEditor> 
  
@@ -123,8 +135,9 @@
  
             <br></br> 
              <p:panel id="toggleable" header="Ingrese los datos del album" toggleable="true" toggleSpeed="500" > 
- 
+                <p:growl id="msgs" showDetail="true"/> 
                 <h:panelGrid columns="2" class="panel"> 
+                      
                     <h:outputLabel value="Nombre Album:" for="itNombreAlbum"  /> 
                     <p:inputText id="itNombreAlbum" value="#{album.albumFormulario.nombreAlbum}" required="true" label="Nombre"/> 
                     <p:message for="itNombreAlbum" />  
@@ -150,8 +163,15 @@
                     </h:outputText> 
                      
                     <h:outputLabel  value="Formato:" /> 
-                    <p:inputText id="formato" value="#{album.albumFormulario.formatoAlbum}" /> 
-                     
+                    <h:selectOneMenu id="formato" value="#{album.albumFormulario.formatoAlbum}" style="width:100%">
+                        
+                        <f:selectItem itemValue ="MP3" itemLabel ="MP3" />
+                        <f:selectItem itemValue ="WAV" itemLabel ="WAV" />
+                        <f:selectItem itemValue ="AIFF" itemLabel ="AIFF" />                            
+                        <f:selectItem itemValue ="WMA" itemLabel ="WMA" />  
+                        <f:selectItem itemValue ="OGG" itemLabel ="OGG" /> 
+                        <f:selectItem itemValue ="FLAC" itemLabel ="FLAC" /> 
+                    </h:selectOneMenu>  
                      
                     <h:outputLabel value="Precio" for="itNumero"  /> 
                     <p:inputText type="number" id="itNumero" value="#{album.albumFormulario.precioAlbum}" required="true" label="Precio" > 
@@ -161,7 +181,7 @@
  
  
                     <br></br> 
-                    <p:commandButton actionListener="#{album.insertarAlbum()}" value="Insertar" update="tablaAlbum," validateClient="true" />     
+                    <p:commandButton actionListener="#{album.insertarAlbum()}" value="Insertar" update="tablaAlbum,msgs" validateClient="true" />     
                 </h:panelGrid> 
  
             </p:panel> 
