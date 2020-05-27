@@ -18,8 +18,21 @@ public class Album {
     private Integer precioAlbum;
     private Integer idArtista;
     private Integer idGenero;
+    private String  nombreArtista;
+    private String  nombreGenero;
     
     public Album() {
+    }
+    
+    public Album( Integer idAlbum ,String  nombreAlbum,String nombreArtista,String nombreGenero, String formatoAlbum, String  fechaAlbum , Integer precioAlbum) {
+    this.idAlbum=idAlbum;
+    this.nombreAlbum=nombreAlbum;
+    this.fechaAlbum=fechaAlbum;
+    this.formatoAlbum=formatoAlbum;
+    this.precioAlbum=precioAlbum;
+    this.nombreArtista=nombreArtista;
+    this.nombreGenero=nombreGenero;
+    
     }
 
     public Integer getIdAlbum() {
@@ -77,6 +90,25 @@ public class Album {
     public void setIdGenero(Integer idGenero) {
         this.idGenero = idGenero;
     }
+
+    public String getNombreArtista() {
+        return nombreArtista;
+    }
+
+    public void setNombreArtista(String nombreArtista) {
+        this.nombreArtista = nombreArtista;
+    }
+
+    public String getNombreGenero() {
+        return nombreGenero;
+    }
+
+    public void setNombreGenero(String nombreGenero) {
+        this.nombreGenero = nombreGenero;
+    }
     
-    
+    @Override
+    public String toString(){
+        return this.nombreAlbum;
+    }
 }

@@ -13,7 +13,12 @@ public class Genero {
     
     private Integer idGenero;
     private String nombreGenero;
-    public Genero() {
+    
+    public Genero(){
+    }
+    public Genero(Integer idGenero,String nombreGenero) {
+        this.idGenero=idGenero;
+        this.nombreGenero=nombreGenero;
     }
 
     public Integer getIdGenero() {
