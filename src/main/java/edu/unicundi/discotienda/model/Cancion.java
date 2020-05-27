@@ -16,8 +16,17 @@ public class Cancion {
     private String  duracionCancion;
     private Integer precioCancion;
     private Integer idAlbum;
+    private String  nombreAlbum;
     
     public Cancion() {
+    }
+    
+    public Cancion(Integer idCancion ,String nombreAlbum, String nombreCancion , String duracionCancion,  Integer precioCancion) {
+      this.idCancion=idCancion;
+      this.nombreCancion=nombreCancion;
+      this.duracionCancion=duracionCancion;
+      this.precioCancion=precioCancion;
+      this.nombreAlbum=nombreAlbum;
     }
 
     public Integer getIdCancion() {
@@ -58,6 +67,14 @@ public class Cancion {
 
     public void setIdAlbum(Integer idAlbum) {
         this.idAlbum = idAlbum;
+    }
+
+    public String getNombreAlbum() {
+        return nombreAlbum;
+    }
+
+    public void setNombreAlbum(String nombreAlbum) {
+        this.nombreAlbum = nombreAlbum;
     }
     
 }

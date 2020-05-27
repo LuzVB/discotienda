@@ -15,6 +15,7 @@
         </style>
         <h:form id="formularioArtista">
             <h:button value="Añadir Album" outcome="album" />
+            <h:button value="Añadir Cancion" outcome="cancion" />
             <p:growl id="msg" showDetail="true"/> 
             <p:dataTable id="tablaArtista" var="artista" value="#{inicio.listaArtista}" rows="5"
                          editable="true" rendered="true"
