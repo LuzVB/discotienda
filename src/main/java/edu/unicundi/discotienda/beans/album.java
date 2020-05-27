@@ -35,7 +35,7 @@ public class album implements Serializable{
     private List<Album> listaAlbum;
     private List<Genero> listaGenero;
     private List<Artista> listaArtista;
-     private Album albumFormulario;
+    private Album albumFormulario;
      
     @Inject
     private DatosAlbum service;
@@ -84,10 +84,9 @@ public class album implements Serializable{
                 + "VALUES ((SELECT MAX(id_album)+1 as id_album FROM public.album)," + "'" + albumFormulario.getNombreAlbum() + "'," + "'" + albumFormulario.getFechaAlbum() + "'," + "'" + albumFormulario.getFormatoAlbum() + "'," + "'" + albumFormulario.getPrecioAlbum() + "'," + "'" + idArtista + "'" + ",'" + idGenero + "');";
         System.out.println(albumFormulario.getNombreAlbum() + "'," + "'" + albumFormulario.getFechaAlbum() + "'," + "'" + albumFormulario.getFormatoAlbum() + "'," + "'" + albumFormulario.getPrecioAlbum() + "'," + "'" + idArtista + "'" + ",'" + idGenero);
         FacesMessage message = new FacesMessage("Se inserto correctamente");
-        service.modifacionBaseDatos(cadenaSql, message);
-        
-        
+        service.modifacionBaseDatos(cadenaSql, message);  
     }
+    
     public void actualizarAlbum(RowEditEvent event){
         Album datosAlbum = (Album) event.getObject();
         this.idArtista = Integer.parseInt(datosAlbum.getNombreArtista());

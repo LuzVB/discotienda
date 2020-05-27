@@ -18,7 +18,6 @@
                          rowsPerPageTemplate="5,10"> 
                 <f:facet name="header"> 
                     Lista de Canciones
-                    #{cancion.listarCancion()} 
                 </f:facet> 
                 <p:ajax event="rowEdit" listener="#{cancion.actualizarCancion}" update=":formularioCancion:msg"/> 
                 <p:ajax event="rowEditCancel" listener="#{cancion.eliminarCancion}" update=":formularioCancion:msg"/> 

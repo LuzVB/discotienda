@@ -16,6 +16,7 @@
         <h:form id="formularioArtista">
             <h:button value="Añadir Album" outcome="album" />
             <h:button value="Añadir Cancion" outcome="cancion" />
+            <h:button value="Comprar Album" outcome="albumUsuario" />
             <p:growl id="msg" showDetail="true"/> 
             <p:dataTable id="tablaArtista" var="artista" value="#{inicio.listaArtista}" rows="5"
                          editable="true" rendered="true"
@@ -25,7 +26,6 @@
                          rowsPerPageTemplate="5,10">
                 <f:facet name="header">
                     Lista de artistas
-                    #{inicio.listarArtista()}
                 </f:facet>
                 <p:ajax event="rowEdit" listener="#{inicio.actualizarArtista}" update=":formularioArtista:msg"/>
                 <p:ajax event="rowEditCancel" listener="#{inicio.eliminarArtista}" update=":formularioArtista:msg"/>
