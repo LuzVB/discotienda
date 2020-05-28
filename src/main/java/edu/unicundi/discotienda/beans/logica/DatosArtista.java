@@ -35,7 +35,6 @@ public class DatosArtista extends Datos implements Serializable {
             String sql = "SELECT id_artista , nombre_artista, pais_artista , fecha_nacimiento FROM artista";
             ResultSet result = st.executeQuery(sql);
             while (result.next()) {
-                System.out.println("Entro a lista");
                 int id = Integer.parseInt(result.getString("id_artista"));
                 listaArtista.add(new Artista(id, result.getString("nombre_artista"), result.getString("pais_artista"), result.getString("fecha_nacimiento")));
             }

@@ -1,57 +1,64 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        <h:form id="formularioCancion"> 
-            <p:growl id="msg" showDetail="true"/>  
-            <p:dataTable id="tablaAlbum" var="artista" value="#{cancionUsuario.listaCancionU}" rows="5" 
-                         editable="true" rendered="true" 
-                         paginator="true" 
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
-                         currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords}" 
-                         rowsPerPageTemplate="5,10"> 
-                <f:facet name="header"> 
-                    Compra de Album
-                </f:facet> 
-                <p:column headerText="Nombre Artista" filterBy="#{artista.nombreArtista}" filterMatchMode="contains" sortBy="#{artista.nombreArtista}"> 
-                    <h:outputText value="#{artista.nombreArtista}" />  
-                </p:column> 
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
-                <p:column headerText="Nombre Album" filterBy="#{artista.nombreAlbum}" filterMatchMode="contains" sortBy="#{artista.nombreAlbum}"> 
-                    <h:outputText value="#{artista.nombreAlbum}" /> 
-                </p:column> 
- 
-                <p:column headerText="Nombre cancion" filterBy="#{artista.nombreCancion}" filterMatchMode="contains" sortBy="#{artista.nombreCancion}"> 
-                    <h:outputText value="#{artista.nombreCancion}" /> 
-                </p:column> 
- 
- 
-                <p:column headerText="Duracion" sortBy="#{artista.duracionCancion}"> 
-                    <h:outputText value="#{artista.duracionCancion}" /> 
-                </p:column> 
-                 
-                <p:column headerText="Formato" filterBy="#{artista.formato}" filterMatchMode="contains" sortBy="#{artista.formato}" > 
-                    <h:outputText value="#{artista.formato}" /> 
-                </p:column>  
-                 
-                <p:column headerText="Precio" sortBy="#{artista.precioCancion}" > 
-                    <h:outputText value="#{artista.precioCancion}" > 
-                        <f:convertNumber type="currency" currencySymbol="$" />
-                    </h:outputText>
-                </p:column> 
+    <body>
 
-                <p:column headerText="Compra" > 
-                    <p:commandButton value="Comprar" actionListener="#{cancionUsuario.comprarCancion()}" /> 
-                </p:column>
+        <ui:composition template="./plantillaCliente.xhtml">
 
-            </p:dataTable>
-        </h:form>
-    </h:body>
+            <ui:define name="content">
+                <h:form id="formularioCancion"> 
+                    <p:growl id="msg" showDetail="true"/>  
+                    <p:dataTable id="tablaAlbum" var="artista" value="#{cancionUsuario.listaCancionU}" rows="5" 
+                                 editable="true" rendered="true" 
+                                 paginator="true" 
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                                 currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords}" 
+                                 rowsPerPageTemplate="5,10"> 
+                        <f:facet name="header"> 
+                            Compra de Album
+                        </f:facet> 
+                        <p:column headerText="Nombre Artista" filterBy="#{artista.nombreArtista}" filterMatchMode="contains" sortBy="#{artista.nombreArtista}"> 
+                            <h:outputText value="#{artista.nombreArtista}" />  
+                        </p:column> 
+
+                        <p:column headerText="Nombre Album" filterBy="#{artista.nombreAlbum}" filterMatchMode="contains" sortBy="#{artista.nombreAlbum}"> 
+                            <h:outputText value="#{artista.nombreAlbum}" /> 
+                        </p:column> 
+
+                        <p:column headerText="Nombre cancion" filterBy="#{artista.nombreCancion}" filterMatchMode="contains" sortBy="#{artista.nombreCancion}"> 
+                            <h:outputText value="#{artista.nombreCancion}" /> 
+                        </p:column> 
+
+
+                        <p:column headerText="Duracion" sortBy="#{artista.duracionCancion}"> 
+                            <h:outputText value="#{artista.duracionCancion}" /> 
+                        </p:column> 
+
+                        <p:column headerText="Formato" filterBy="#{artista.formato}" filterMatchMode="contains" sortBy="#{artista.formato}" > 
+                            <h:outputText value="#{artista.formato}" /> 
+                        </p:column>  
+
+                        <p:column headerText="Precio" sortBy="#{artista.precioCancion}" > 
+                            <h:outputText value="#{artista.precioCancion}" > 
+                                <f:convertNumber type="currency" currencySymbol="$" />
+                            </h:outputText>
+                        </p:column> 
+
+                        <p:column headerText="Compra" > 
+                            <p:commandButton value="Comprar" actionListener="#{cancionUsuario.comprarCancion()}" /> 
+                        </p:column>
+
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
 </html>
 
