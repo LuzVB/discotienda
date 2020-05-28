@@ -7,6 +7,7 @@ package edu.unicundi.discotienda.beans.logica;
 
 import edu.unicundi.discotienda.model.Album;
 import edu.unicundi.discotienda.model.Cancion;
+import edu.unicundi.discotienda.model.Usuario;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -23,8 +24,9 @@ import java.util.List;
 @SessionScoped
 public class DatosCancion extends Datos implements Serializable {
 
-    private List<Cancion> listaCancion;
+   private List<Cancion> listaCancion;
     private List<Album> listaAlbum;
+    private List<Usuario> listaCancionU;
     public DatosCancion() {
     }
     
@@ -45,6 +47,26 @@ public class DatosCancion extends Datos implements Serializable {
         } catch (Exception e) {
 
         }
+    }
+    
+     public void listarCancionU() throws SQLException {
+        listaCancionU = new ArrayList<>();
+        listaCancionU.clear();
+        java.sql.Statement st = conexion.createStatement();
+        System.out.println("Entro a listaCancionUsuario");
+        try {
+            String sql = "SELECT id_cancion, nombre_artista, nombre_album, nombre_cancion, duracion_cancion, formato_album, precio_cancion  FROM public.view_cancionus";
+            ResultSet result = st.executeQuery(sql);
+            while (result.next()) {
+                System.out.println("Entro a listaCancionUsuario2");
+                int id = Integer.parseInt(result.getString("id_cancion"));
+                int idPrecio= Integer.parseInt(result.getString("precio_cancion"));
+                listaCancionU.add(new Usuario(id, result.getString("nombre_artista"), result.getString("nombre_album"), result.getString("nombre_cancion") , result.getString("duracion_cancion"), result.getString("formato_album"),idPrecio));
+                System.out.println(result.getString("duracion_cancion"));
+            }
+        } catch (Exception e) {
+
+        }  
     }
     public void listarAlbum() throws SQLException {
         listaAlbum = new ArrayList<>();
@@ -78,6 +100,14 @@ public class DatosCancion extends Datos implements Serializable {
 
     public void setListaAlbum(List<Album> listaAlbum) {
         this.listaAlbum = listaAlbum;
+    }
+
+    public List<Usuario> getListaCancionU() {
+        return listaCancionU;
+    }
+
+    public void setListaCancionU(List<Usuario> listaCancionU) {
+        this.listaCancionU = listaCancionU;
     }
     
 }
