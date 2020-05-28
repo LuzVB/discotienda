@@ -7,7 +7,6 @@ package edu.unicundi.discotienda.beans;
 
 import edu.unicundi.discotienda.beans.logica.DatosInicioSesion;
 import edu.unicundi.discotienda.model.Administrador;
-import edu.unicundi.discotienda.model.Artista;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -65,6 +64,15 @@ public class InicioSesion {
 
     public String direccionar() {
         return "index";
+    }
+    
+    public void cerrarSesion() {
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("inicioSesion.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(InicioSesion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public Administrador getAdminInicio() {

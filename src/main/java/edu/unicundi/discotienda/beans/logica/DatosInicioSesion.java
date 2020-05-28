@@ -6,13 +6,9 @@
 package edu.unicundi.discotienda.beans.logica;
 
 import edu.unicundi.discotienda.model.Administrador;
-import edu.unicundi.discotienda.model.Artista;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -33,7 +29,7 @@ public class DatosInicioSesion extends Datos implements Serializable {
     }
 
     @PostConstruct
-    public void init() {
+    public void initInicio() {
         adminDatos = new Administrador();
     }
     

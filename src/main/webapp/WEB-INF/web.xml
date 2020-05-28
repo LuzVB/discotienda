@@ -25,4 +25,8 @@
         <param-name>primefaces.THEME</param-name>
         <param-value>nova-light</param-value>
     </context-param>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/faces/404.xhtml</location>
+    </error-page>
 </web-app>

@@ -34,7 +34,6 @@ public class inicio implements Serializable {
     @Inject
     private DatosArtista service;
 
-   
     public inicio() {
     }
 
@@ -46,41 +45,39 @@ public class inicio implements Serializable {
     }
 
     public void insertarArtista() {
-        String cadenaSql = "INSERT INTO public.artista(id_artista, nombre_artista, pais_artista, fecha_nacimiento)" 
-                 + "VALUES ((SELECT MAX(id_artista)+1 as id_artista FROM public.artista)," + "'" + artistaFormulario.getNombre() + "'," + "'" + artistaFormulario.getPais() + "'" + ",'" + "04/05/1849" + "');";   
+        String cadenaSql = "INSERT INTO public.artista(id_artista, nombre_artista, pais_artista, fecha_nacimiento)"
+                + "VALUES ((SELECT MAX(id_artista)+1 as id_artista FROM public.artista)," + "'" + artistaFormulario.getNombre() + "'," + "'" + artistaFormulario.getPais() + "'" + ",'" + artistaFormulario.getFechaNacimiento() + "');";
 //                    "INSERT INTO public.artista(id_artista, nombre_artista, pais_artista, fecha_nacimiento)"
 //                    + "VALUES  ((SELECT MAX(id_artista)+1 as id_artista FROM public.artista),'" + artista.getNombre() + "','" + artista.getPais() + "','1959-08-11')";
         FacesMessage message = new FacesMessage("Se inserto correctamente");
         service.modifacionBaseDatos(cadenaSql, message);
     }
 
-    public void listarArtista(){
+    public void listarArtista() {
         try {
             service.listar();
         } catch (SQLException ex) {
             Logger.getLogger(inicio.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
-    public void actualizarArtista(RowEditEvent event){
+
+    public void actualizarArtista(RowEditEvent event) {
         Artista datosArtista = (Artista) event.getObject();
-        String cadenaSql = "UPDATE public.artista SET nombre_artista='"+datosArtista.getNombre()+"',pais_artista='"+datosArtista.getPais()+"',fecha_nacimiento='"+datosArtista.getFechaNacimiento()+"' WHERE id_artista="+datosArtista.getId()+";";
+        String cadenaSql = "UPDATE public.artista SET nombre_artista='" + datosArtista.getNombre() + "',pais_artista='" + datosArtista.getPais() + "',fecha_nacimiento='" + datosArtista.getFechaNacimiento() + "' WHERE id_artista=" + datosArtista.getId() + ";";
         FacesMessage message = new FacesMessage("Editó el asrtista con id: " + datosArtista.getId());
         service.modifacionBaseDatos(cadenaSql, message);
     }
-    
-    public void eliminarArtista(RowEditEvent event)  {
+
+    public void eliminarArtista(RowEditEvent event) {
         Artista datosArtista = (Artista) event.getObject();
         String cadenaSql = "DELETE FROM public.artista WHERE id_artista" + "=" + datosArtista.getId() + ";";
         FacesMessage message = new FacesMessage("Se Elimino el artista: " + datosArtista.getId());
         service.modifacionBaseDatos(cadenaSql, message);
     }
-    
+
     public void cancelar(RowEditEvent event) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Cancelar"));
     }
-    
 
     public Artista getArtistaFormulario() {
         return artistaFormulario;

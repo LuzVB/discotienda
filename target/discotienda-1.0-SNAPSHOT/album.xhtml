@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+        <ui:composition template="./plantillaAdministrador.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formularioAlbum"> 
+                    <p:growl id="msg" showDetail="true"/>  
+                    <p:dataTable id="tablaAlbum" var="artista" value="#{album.listaAlbum}" rows="5" 
+                                 editable="true" rendered="true" 
+                                 paginator="true" 
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
+                                 currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords}" 
+                                 rowsPerPageTemplate="5,10"> 
+                        <f:facet name="header"> 
+                            Lista de Albums 
+                        </f:facet> 
+                        <p:ajax event="rowEdit" listener="#{album.actualizarAlbum}" update=":formularioAlbum:msg"/> 
+                        <p:ajax event="rowEditCancel" listener="#{album.eliminarAlbum}" update=":formularioAlbum:msg"/> 
+
+                        <p:column headerText="Id" filterMatchMode="contains" sortBy="#{artista.idAlbum}"> 
+                            <p:cellEditor> 
+                                <f:facet name="output"> 
+                                    <h:outputText value="#{artista.idAlbum}" /> 
+                                </f:facet> 
+                                <f:facet name="input"> 
+                                    <p:inputText value="#{artista.idAlbum}"/> 
+                                </f:facet> 
+                            </p:cellEditor> 
+                        </p:column> 
+
+                        <p:column headerText="Nombre Album"> 
+                            <p:cellEditor> 
+                                <f:facet name="output"> 
+                                    <h:outputText value="#{artista.nombreAlbum}" /> 
+                                </f:facet> 
+                                <f:facet name="input"> 
+                                    <p:inputText value="#{artista.nombreAlbum}"/> 
+                                </f:facet> 
+                            </p:cellEditor> 
+                        </p:column> 
+
+                        <p:column headerText="Artista" > 
+                            <p:cellEditor> 
+                                <f:facet name="output"> 
+                                    <h:outputText value="#{artista.nombreArtista}" /> 
+                                </f:facet> 
+                                <f:facet name="input"> 
+                                    <p:selectOneMenu value="#{artista.nombreArtista}" style="width:100%"> 
+                                        <f:selectItems value ="#{album.listaArtista}" var="nomartista" itemValue="#{nomartista.id}" itemLabel="#{nomartista.nombre}" /> 
+                                    </p:selectOneMenu> 
+                                </f:facet> 
+                            </p:cellEditor> 
+
+                        </p:column> 
+
+
+                        <p:column headerText="Genero" > 
+                            <p:cellEditor> 
+                                <f:facet name="output"> 
+                                    <h:outputText value="#{artista.nombreGenero}" /> 
+                                </f:facet> 
+                                <f:facet name="input"> 
+                                    <p:selectOneMenu value="#{artista.nombreGenero}" style="width:100%"> 
+                                        <f:selectItems value ="#{album.listaGenero}" var="user" itemValue="#{user.idGenero}" itemLabel="#{user.nombreGenero}" /> 
+                                    </p:selectOneMenu> 
+                                </f:facet> 
+                            </p:cellEditor> 
+                        </p:column> 
+
+                        <p:column headerText="Formato" > 
+                            <p:cellEditor> 
+                                <f:facet name="output"> 
+                                    <h:outputText value="#{artista.formatoAlbum}" /> 
+                                </f:facet> 
+                                <f:facet name="input"> 
+                                    <p:inputText value="#{artista.formatoAlbum}"/> 
+                                </f:facet> 
+                            </p:cellEditor> 
+
+                        </p:column> 
+
+                        <p:column headerText="Fecha lanzamiento" > 
+                            <p:cellEditor> 
+                                <f:facet name="output"> 
+                                    <h:outputText value="#{artista.fechaAlbum}" /> 
+                                </f:facet> 
+                                <f:facet name="input"> 
+                                    <p:inputText value="#{artista.fechaAlbum}"/> 
+                                </f:facet> 
+                            </p:cellEditor> 
+
+                        </p:column> 
+
+                        <p:column headerText="Precio"  > 
+                            <p:cellEditor> 
+                                <f:facet name="output"> 
+                                    <h:outputText value="#{artista.precioAlbum}" /> 
+                                </f:facet> 
+                                <f:facet name="input"> 
+                                    <p:inputText value="#{artista.precioAlbum}"/> 
+                                </f:facet> 
+                            </p:cellEditor> 
+
+                        </p:column> 
+
+
+                        <p:column headerText="Modificar"> 
+                            <p:rowEditor/> 
+                        </p:column> 
+
+                        <!--<p:column headerText="Eliminar" > 
+                            <p:commandButton value="Eliminar" actionListener="#{album.eliminarAlbum(artista)}" update="tablaAlbum" /> 
+                        </p:column>--> 
+
+                    </p:dataTable>    
+
+                    <br></br> 
+                    <p:panel id="toggleable" header="Ingrese los datos del album" toggleable="true" toggleSpeed="500" > 
+
+                        <h:panelGrid columns="2" class="panel"> 
+                            <h:outputLabel value="Nombre Album:" for="itNombreAlbum"  /> 
+                            <p:inputText id="itNombreAlbum" value="#{album.albumFormulario.nombreAlbum}" required="true" label="Nombre"/> 
+                            <p:message for="itNombreAlbum" />  
+
+                            <h:outputText value="#{album.albumFormulario.nombreAlbum}" /> 
+                            <h:outputLabel  value="Artista: " /> 
+                            <p:selectOneMenu value="#{album.albumFormulario.nombreArtista}" style="width:100%"> 
+                                <f:selectItems value ="#{album.listaArtista}" var="nomartista" itemValue="#{nomartista.id}" itemLabel="#{nomartista.nombre}" /> 
+                            </p:selectOneMenu> 
+
+                            <h:outputLabel  value="Genero: " /> 
+                            <p:selectOneMenu value="#{album.albumFormulario.nombreGenero}" style="width:100%"> 
+                                <f:selectItems value ="#{album.listaGenero}" var="user" itemValue="#{user.idGenero}" itemLabel="#{user.nombreGenero}" /> 
+                            </p:selectOneMenu> 
+
+                            <h:outputLabel value="Fecha de lanzamiento:" for="itCalendario"  /> 
+                            <p:calendar id="itCalendario" value="#{album.albumFormulario.fechaAlbum}" pattern="dd/MM/yyyy" required="true" label="Calendario"  > 
+                                <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                            </p:calendar> 
+                            <p:message for="itCalendario" />  
+                            <h:outputText  > 
+                                <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                            </h:outputText> 
+
+                            <h:outputLabel  value="Formato:" /> 
+                            <p:inputText id="formato" value="#{album.albumFormulario.formatoAlbum}" /> 
+
+
+                            <h:outputLabel value="Precio" for="itNumero"  /> 
+                            <p:inputText type="number" id="itNumero" value="#{album.albumFormulario.precioAlbum}" required="true" label="Precio" > 
+                                <f:validateDoubleRange minimum="1" maximum="900000" /> 
+                            </p:inputText> 
+                            <p:message for="itNumero" />  
+
+
+                            <br></br> 
+                            <p:commandButton actionListener="#{album.insertarAlbum()}" value="Insertar" update="tablaAlbum,msg" validateClient="true" />     
+                        </h:panelGrid> 
+
+                    </p:panel> 
+                </h:form> 
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+

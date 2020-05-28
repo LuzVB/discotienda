@@ -1,89 +1,87 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>Artista</title>  
-    </h:head>
-    <h:body>
-        <style type="text/css">
-            .toggleable div {
-                background-color: #FAC299;
-            }
-        </style>
-        <h:form id="formularioArtista">
-            <h:button value="Añadir Album" outcome="album" />
-            <h:button value="Añadir Cancion" outcome="cancion" />
-            <h:button value="Comprar Album" outcome="albumUsuario" />
-            <p:growl id="msg" showDetail="true"/> 
-            <p:dataTable id="tablaArtista" var="artista" value="#{inicio.listaArtista}" rows="5"
-                         editable="true" rendered="true"
-                         paginator="true"
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords}"
-                         rowsPerPageTemplate="5,10">
-                <f:facet name="header">
-                    Lista de artistas
-                </f:facet>
-                <p:ajax event="rowEdit" listener="#{inicio.actualizarArtista}" update=":formularioArtista:msg"/>
-                <p:ajax event="rowEditCancel" listener="#{inicio.eliminarArtista}" update=":formularioArtista:msg"/>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
 
-                <p:column headerText="Id">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{artista.id}" />
+        <ui:composition template="./plantillaAdministrador.xhtml">
+
+            <ui:define name="content">
+                <style type="text/css">
+                    .toggleable div {
+                        background-color: #FAC299;
+                    }
+                </style>
+                <h:form id="formularioArtista">
+                    <p:growl id="msg" showDetail="true"/> 
+                    <p:dataTable id="tablaArtista" var="artista" value="#{inicio.listaArtista}" rows="5"
+                                 editable="true" rendered="true"
+                                 paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords}"
+                                 rowsPerPageTemplate="5,10">
+                        <f:facet name="header">
+                            Lista de artistas
                         </f:facet>
-                        <f:facet name="input">
-                            <p:inputText value="#{artista.id}"/>
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
+                        <p:ajax event="rowEdit" listener="#{inicio.actualizarArtista}" update=":formularioArtista:msg"/>
+                        <p:ajax event="rowEditCancel" listener="#{inicio.eliminarArtista}" update=":formularioArtista:msg"/>
 
-                <p:column headerText="Nombre">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{artista.nombre}" />
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputText value="#{artista.nombre}"/>
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
+                        <p:column headerText="Id">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{artista.id}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{artista.id}"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
 
-                <p:column headerText="Pais">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{artista.pais}" />
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputText value="#{artista.pais}"/>
-                        </f:facet>
-                    </p:cellEditor>
+                        <p:column headerText="Nombre">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{artista.nombre}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{artista.nombre}"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
 
-                </p:column>
+                        <p:column headerText="Pais">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{artista.pais}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <h:selectOneMenu id="pais" value="#{artista.pais}" style="width:100%">
+                                        <f:selectItem itemValue ="Colombia" itemLabel ="Colombia" />
+                                        <f:selectItem itemValue ="Estados Unidos" itemLabel ="Estados Unidos" />
+                                        <f:selectItem itemValue ="Japon" itemLabel ="Japon" />                            
+                                        <f:selectItem itemValue ="España" itemLabel ="España" />  
+                                        <f:selectItem itemValue ="Argentina" itemLabel ="Argentina" /> 
+                                        <f:selectItem itemValue ="Londres" itemLabel ="Londres" /> 
+                                    </h:selectOneMenu> 
 
-                <p:column headerText="Fecha de nacimiento">
-                    <p:cellEditor>
-                        <f:facet name="output">
-                            <h:outputText value="#{artista.fechaNacimiento}" />
-                        </f:facet>
-                        <f:facet name="input">
-                            <p:inputText value="#{artista.fechaNacimiento}"/>
-                        </f:facet>
-                    </p:cellEditor>
+                                </f:facet>
+                            </p:cellEditor>
 
-                </p:column>
+                        </p:column>
 
-                <p:column headerText="Modificar">
-                    <p:rowEditor/>
-                </p:column>
+                        <p:column headerText="Fecha de nacimiento">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{artista.fechaNacimiento}" />
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{artista.fechaNacimiento}"/>
+                                </f:facet>
+                            </p:cellEditor>
 
-            </p:dataTable>
-            
-
-            <br></br>
+                        </p:column>
 
             <p:panel id="toggleable" header="Ingrese los datos del artista" toggleable="true" toggleSpeed="500" >
               <p:growl id="msgs" showDetail="true"/> 
@@ -116,9 +114,43 @@
                     <p:commandButton actionListener="#{inicio.insertarArtista()}" value="Insertar" update="tablaArtista,msgs"/>
                 </h:panelGrid>
 
-            </p:panel>
-        </h:form>
+                    <p:panel id="toggleable" header="Ingrese los datos del artista" toggleable="true" toggleSpeed="500" >
+                        <h:panelGrid columns="4" class="panel">
 
-    </h:body>
+                            <h:outputLabel value="Nombre artista" for="itNombreCancion"  /> 
+                            <p:inputText id="itNombreCancion" value="#{inicio.artistaFormulario.nombre}" required="true" label="Nombre"/> 
+                            <p:message for="itNombreCancion" /> 
+                            <br></br>
+
+                            <h:outputLabel value="Fecha de nacimiento:" for="itCalendario"  /> 
+                            <p:calendar id="itCalendario" value="#{inicio.artistaFormulario.fechaNacimiento}" pattern="dd/MM/yyyy" required="true" label="Calendario"  > 
+                                <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                            </p:calendar> 
+                            <p:message for="itCalendario" />  
+                            <h:outputText  > 
+                                <f:convertDateTime pattern="dd/MM/yyyy" /> 
+                            </h:outputText> 
+
+                            <h:outputLabel  value="Pais: " />
+                            <h:selectOneMenu id="pais" value="#{inicio.artistaFormulario.pais}" style="width:100%">
+                                <f:selectItem itemValue ="Colombia" itemLabel ="Colombia" />
+                                <f:selectItem itemValue ="Estados Unidos" itemLabel ="Estados Unidos" />
+                                <f:selectItem itemValue ="Japon" itemLabel ="Japon" />                            
+                                <f:selectItem itemValue ="España" itemLabel ="España" />  
+                                <f:selectItem itemValue ="Argentina" itemLabel ="Argentina" /> 
+                                <f:selectItem itemValue ="Londres" itemLabel ="Londres" /> 
+                            </h:selectOneMenu> 
+                            
+                            <p:commandButton actionListener="#{inicio.insertarArtista()}" value="Insertar" update="formularioArtista,msg"/>
+                        </h:panelGrid>
+
+                    </p:panel>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
 </html>
 
