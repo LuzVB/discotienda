@@ -10,11 +10,6 @@
         <ui:composition template="./plantillaAdministrador.xhtml">
 
             <ui:define name="content">
-                <style type="text/css">
-                    .toggleable div {
-                        background-color: #FAC299;
-                    }
-                </style>
                 <h:form id="formularioArtista">
                     <p:growl id="msg" showDetail="true"/> 
                     <p:dataTable id="tablaArtista" var="artista" value="#{inicio.listaArtista}" rows="5"
@@ -83,36 +78,14 @@
 
                         </p:column>
 
-            <p:panel id="toggleable" header="Ingrese los datos del artista" toggleable="true" toggleSpeed="500" >
-              <p:growl id="msgs" showDetail="true"/> 
-                <h:panelGrid columns="1" class="panel">
+                        <p:column headerText="Modificar">
+                            <p:rowEditor/>
+                        </p:column>
 
-                    <h:outputLabel value="Nombre artista" for="itNombreAlbum"  /> 
-                    <p:inputText id="itNombreAlbum" value="#{inicio.artistaFormulario.nombre}" required="true" label="Nombre"/> 
-                    <p:message for="itNombreAlbum" />  
+                    </p:dataTable>
 
-                    <h:outputLabel value="Fecha de nacimiento:" for="itCalendario"  /> 
-                    <p:calendar id="itCalendario" value="#{inicio.artistaFormulario.fechaNacimiento}" pattern="dd/MM/yyyy" required="true" label="Calendario"  > 
-                        <f:convertDateTime pattern="dd/MM/yyyy" /> 
-                    </p:calendar> 
-                    <p:message for="itCalendario" />  
-                    <h:outputText  > 
-                         <f:convertDateTime pattern="dd/MM/yyyy" /> 
-                    </h:outputText> 
-                    
-                    <h:outputLabel  value="Pais: " />
-                     <h:selectOneMenu id="pais" value="#{inicio.artistaFormulario.pais}" style="width:100%">
-                        <f:selectItem itemValue ="Colombia" itemLabel ="Colombia" />
-                        <f:selectItem itemValue ="Estados Unidos" itemLabel ="Estados Unidos" />
-                        <f:selectItem itemValue ="Japon" itemLabel ="Japon" />                            
-                        <f:selectItem itemValue ="España" itemLabel ="España" />  
-                        <f:selectItem itemValue ="Argentina" itemLabel ="Argentina" /> 
-                        <f:selectItem itemValue ="Londres" itemLabel ="Londres" /> 
-                    </h:selectOneMenu> 
 
                     <br></br>
-                    <p:commandButton actionListener="#{inicio.insertarArtista()}" value="Insertar" update="tablaArtista,msgs"/>
-                </h:panelGrid>
 
                     <p:panel id="toggleable" header="Ingrese los datos del artista" toggleable="true" toggleSpeed="500" >
                         <h:panelGrid columns="4" class="panel">
@@ -120,7 +93,7 @@
                             <h:outputLabel value="Nombre artista" for="itNombreCancion"  /> 
                             <p:inputText id="itNombreCancion" value="#{inicio.artistaFormulario.nombre}" required="true" label="Nombre"/> 
                             <p:message for="itNombreCancion" /> 
-                            <br></br>
+                            <h:outputLabel  /> 
 
                             <h:outputLabel value="Fecha de nacimiento:" for="itCalendario"  /> 
                             <p:calendar id="itCalendario" value="#{inicio.artistaFormulario.fechaNacimiento}" pattern="dd/MM/yyyy" required="true" label="Calendario"  > 
@@ -130,7 +103,7 @@
                             <h:outputText  > 
                                 <f:convertDateTime pattern="dd/MM/yyyy" /> 
                             </h:outputText> 
-
+                            
                             <h:outputLabel  value="Pais: " />
                             <h:selectOneMenu id="pais" value="#{inicio.artistaFormulario.pais}" style="width:100%">
                                 <f:selectItem itemValue ="Colombia" itemLabel ="Colombia" />
@@ -141,12 +114,12 @@
                                 <f:selectItem itemValue ="Londres" itemLabel ="Londres" /> 
                             </h:selectOneMenu> 
                             
+                            
                             <p:commandButton actionListener="#{inicio.insertarArtista()}" value="Insertar" update="formularioArtista,msg"/>
                         </h:panelGrid>
 
                     </p:panel>
                 </h:form>
-
             </ui:define>
 
         </ui:composition>
