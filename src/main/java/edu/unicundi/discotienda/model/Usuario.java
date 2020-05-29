@@ -24,7 +24,7 @@ public class Usuario {
     }
     
 
-    public Usuario(Integer idCancion, String nombreArtista, String nombreAlbum, String nombreCancion,String duracionCancion, String formato, Integer precioCancion) {
+    public Usuario(Integer idCancion, String nombreArtista, String nombreAlbum, String nombreCancion,String duracionCancion, String formato, Integer precioCancion, Integer idAlbum) {
         this.idCancion = idCancion;
         this.nombreArtista = nombreArtista;
         this.nombreAlbum = nombreAlbum;
@@ -32,6 +32,7 @@ public class Usuario {
         this.duracionCancion=duracionCancion;
         this.formato = formato;
         this.precioCancion = precioCancion;
+        this.idAlbum = idAlbum;
     }
 
     public Integer getIdCancion() {

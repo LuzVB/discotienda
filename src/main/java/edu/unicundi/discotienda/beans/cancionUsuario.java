@@ -6,6 +6,7 @@
 package edu.unicundi.discotienda.beans;
 
 import edu.unicundi.discotienda.beans.logica.DatosCancion;
+import edu.unicundi.discotienda.beans.logica.DatosCompra;
 import edu.unicundi.discotienda.model.Usuario;
 import java.sql.SQLException;
 import java.util.List;
@@ -25,10 +26,13 @@ import javax.inject.Inject;
 public class cancionUsuario {
 
     private List<Usuario> listaCancionU;
-     private Usuario cancionUFormulario;
+    private Usuario cancionUFormulario;
      
     @Inject
     private DatosCancion service;
+    
+    @Inject
+    private DatosCompra serviceCompra;
     
     public cancionUsuario() {
     }
@@ -41,9 +45,8 @@ public class cancionUsuario {
     }
     
 
-    public void comprarCancion() {
-       
-
+    public void comprarCancion(Usuario usuario) {
+        serviceCompra.llenarCancion(usuario);
     }
     
     public void listarCancionU(){

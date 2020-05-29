@@ -22,10 +22,7 @@
                         <f:facet name="header"> 
                             Compra de Album
                         </f:facet> 
-                        <p:column headerText="N°" filterMatchMode="contains" sortBy="#{artista.idAlbum}"> 
-                            <h:outputText value="#{artista.idAlbum}" />  
-                        </p:column> 
-
+                        
                         <p:column headerText="Nombre"   sortBy="#{artista.nombreAlbum}"> 
                             <h:outputText value="#{artista.nombreAlbum}" /> 
                         </p:column> 
@@ -53,7 +50,7 @@
 
 
                         <p:column headerText="Compra" > 
-                            <p:commandButton value="Comprar" actionListener="#{albumUsuario.comprarAlbum()}" /> 
+                            <p:commandButton value="Comprar" actionListener="#{albumUsuario.comprarAlbum(artista)}" update="@form" /> 
                         </p:column>
 
 

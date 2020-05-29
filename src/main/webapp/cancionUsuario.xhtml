@@ -13,44 +13,44 @@
             <ui:define name="content">
                 <h:form id="formularioCancion"> 
                     <p:growl id="msg" showDetail="true"/>  
-                    <p:dataTable id="tablaAlbum" var="artista" value="#{cancionUsuario.listaCancionU}" rows="5" 
+                    <p:dataTable id="tablaAlbum" var="usuario" value="#{cancionUsuario.listaCancionU}" rows="5" 
                                  editable="true" rendered="true" 
                                  paginator="true" 
                                  paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" 
                                  currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords}" 
                                  rowsPerPageTemplate="5,10"> 
                         <f:facet name="header"> 
-                            Compra de Album
-                        </f:facet> 
-                        <p:column headerText="Nombre Artista" filterBy="#{artista.nombreArtista}" filterMatchMode="contains" sortBy="#{artista.nombreArtista}"> 
-                            <h:outputText value="#{artista.nombreArtista}" />  
+                            Compra de Cancion
+                        </f:facet>
+                        
+                        <p:column headerText="Nombre cancion" filterBy="#{usuario.nombreCancion}" filterMatchMode="contains" sortBy="#{artista.nombreCancion}"> 
+                            <h:outputText value="#{usuario.nombreCancion}" /> 
                         </p:column> 
 
-                        <p:column headerText="Nombre Album" filterBy="#{artista.nombreAlbum}" filterMatchMode="contains" sortBy="#{artista.nombreAlbum}"> 
-                            <h:outputText value="#{artista.nombreAlbum}" /> 
+                        <p:column headerText="Nombre Artista" filterBy="#{usuario.nombreArtista}" filterMatchMode="contains" sortBy="#{artista.nombreArtista}"> 
+                            <h:outputText value="#{usuario.nombreArtista}" />  
                         </p:column> 
 
-                        <p:column headerText="Nombre cancion" filterBy="#{artista.nombreCancion}" filterMatchMode="contains" sortBy="#{artista.nombreCancion}"> 
-                            <h:outputText value="#{artista.nombreCancion}" /> 
+                        <p:column headerText="Nombre Album" filterBy="#{usuario.nombreAlbum}" filterMatchMode="contains" sortBy="#{artista.nombreAlbum}"> 
+                            <h:outputText value="#{usuario.nombreAlbum}" /> 
                         </p:column> 
 
-
-                        <p:column headerText="Duracion" sortBy="#{artista.duracionCancion}"> 
-                            <h:outputText value="#{artista.duracionCancion}" /> 
+                        <p:column headerText="Duracion" sortBy="#{usuario.duracionCancion}"> 
+                            <h:outputText value="#{usuario.duracionCancion}" /> 
                         </p:column> 
 
-                        <p:column headerText="Formato" filterBy="#{artista.formato}" filterMatchMode="contains" sortBy="#{artista.formato}" > 
-                            <h:outputText value="#{artista.formato}" /> 
+                        <p:column headerText="Formato" filterBy="#{usuario.formato}" filterMatchMode="contains" sortBy="#{usuario.formato}" > 
+                            <h:outputText value="#{usuario.formato}" /> 
                         </p:column>  
 
-                        <p:column headerText="Precio" sortBy="#{artista.precioCancion}" > 
-                            <h:outputText value="#{artista.precioCancion}" > 
+                        <p:column headerText="Precio" sortBy="#{usuario.precioCancion}" > 
+                            <h:outputText value="#{usuario.precioCancion}" > 
                                 <f:convertNumber type="currency" currencySymbol="$" />
                             </h:outputText>
                         </p:column> 
 
                         <p:column headerText="Compra" > 
-                            <p:commandButton value="Comprar" actionListener="#{cancionUsuario.comprarCancion()}" /> 
+                            <p:commandButton value="Comprar" actionListener="#{cancionUsuario.comprarCancion(usuario)}" update="@form" /> 
                         </p:column>
 
                     </p:dataTable>
@@ -61,4 +61,3 @@
 
     </body>
 </html>
-
