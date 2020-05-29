@@ -42,11 +42,11 @@ public class listaCompra {
     public void init() {
         this.listaAlbum = serviceCompra.getListaAlbumCompra();
         this.listaCancion = serviceCompra.getListaCancionCompra();
-        serviceCompra.precioCompra();
-        this.precio = serviceCompra.getTotalCompra();
+        this.precio = serviceCompra.precioCompra();
     }
     
     public void confirmarCompra(){
+        this.precio  = serviceCompra.precioCompra();
         serviceCompra.limpiarLista();
     }
     

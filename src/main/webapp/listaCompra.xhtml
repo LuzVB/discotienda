@@ -64,26 +64,24 @@
                             </p:dataTable>
                         </div>
                     </div>
-                    <div class="ui-g">
-                        <div class="ui-g-12"> 
-                            <p:fieldset legend="TOTAL COMPRA" style="margin-bottom:20px; font-size: 150%;">
-                                <h:panelGrid columns="2" cellpadding="5">
-                                    <h:outputText value="#{listaCompra.precio}">
-                                        <f:convertNumber type="currency" currencySymbol="$" />
-                                    </h:outputText> 
-                                    <p:commandButton actionListener="#{listaCompra.confirmarCompra()}" value="Confirmar" update="@form" 
-                                                     icon="pi pi-check" >
-                                        <p:confirm message="GRACIAS POR COMPRAR" header="aviso" icon="ui-icon-alert" />
-                                    </p:commandButton>    
+                    <div class="ui-g-12"> 
+                        <p:fieldset legend="TOTAL COMPRA" style="margin-bottom:20px; font-size: 150%;">
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputText value="#{listaCompra.precio}">
+                                    <f:convertNumber type="currency" currencySymbol="$" />
+                                </h:outputText> 
+                                <p:commandButton actionListener="#{listaCompra.confirmarCompra()}" value="Confirmar" update="@form" 
+                                                 icon="pi pi-check" >
+                                    <p:confirm message="Gracias por comprar" header="aviso" icon="ui-icon-alert" />
+                                </p:commandButton>    
 
-                                    <p:confirmDialog global="true">
-                                        <p:commandButton actionListener="#{listaCompra.redireccionar()}"
-                                                         value="Si" type="button" icon="pi pi-thumbs-up"
-                                                          styleClass="ui-confirmdialog-yes" />
-                                    </p:confirmDialog> 
-                                </h:panelGrid>
-                            </p:fieldset>
-                        </div>
+                                <p:confirmDialog global="true">
+                                    <p:commandButton actionListener="#{listaCompra.redireccionar()}"
+                                                     value="Si" type="button" icon="pi pi-thumbs-up"
+                                                     styleClass="ui-confirmdialog-yes" />
+                                </p:confirmDialog> 
+                            </h:panelGrid>
+                        </p:fieldset>
                     </div>
                 </h:form>
             </ui:define>

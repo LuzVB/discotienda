@@ -8,6 +8,7 @@ package edu.unicundi.discotienda.beans.logica;
 import edu.unicundi.discotienda.model.Album;
 import edu.unicundi.discotienda.model.Artista;
 import edu.unicundi.discotienda.model.Usuario;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -23,7 +24,7 @@ import javax.faces.context.FacesContext;
  */
 @Named(value = "datosCompra")
 @ApplicationScoped
-public class DatosCompra {
+public class DatosCompra  implements Serializable {
 
     private List<Album> listaAlbumCompra;
     private List<Usuario> listaCancionCompra;
@@ -35,47 +36,79 @@ public class DatosCompra {
     public DatosCompra() {
         listaAlbumCompra = new ArrayList<>();
         listaCancionCompra = new ArrayList<>();
+        totalCompra = 0;
     }
 
     @PostConstruct
     public void inicio() {
-        precioCompra();
     }
 
     public void llenarArtista(Album artista) {
-        listaAlbumCompra.add(new Album(artista.getIdAlbum(), artista.getNombreAlbum(),
-                artista.getNombreArtista(), artista.getNombreGenero(), artista.getFormatoAlbum(),
-                artista.getFechaAlbum(), artista.getPrecioAlbum()));
-        
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, 
-                "Añadir album!","Se agrego al carrito el album: "+artista.getNombreAlbum()));
+        boolean encuentro = false;
+        for (Album c : listaAlbumCompra) {
+            if (c.getIdAlbum().equals(artista.getIdAlbum())) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "Error!", "El abum: " + artista.getNombreAlbum() + " Ya se encuentra en el carrito"));
+                encuentro = true;
+            }
+        }
+
+        if (encuentro == false) {
+            listaAlbumCompra.add(new Album(artista.getIdAlbum(), artista.getNombreAlbum(),
+                    artista.getNombreArtista(), artista.getNombreGenero(), artista.getFormatoAlbum(),
+                    artista.getFechaAlbum(), artista.getPrecioAlbum()));
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                    "Añadir album!", "Se agrego al carrito el album: " + artista.getNombreAlbum()));
+        }
     }
 
     public void llenarCancion(Usuario cancion) {
-        listaCancionCompra.add(new Usuario(cancion.getIdCancion(), cancion.getNombreArtista(),
-                cancion.getNombreAlbum(), cancion.getNombreCancion(), cancion.getDuracionCancion(),
-                cancion.getFormato(), cancion.getPrecioCancion(), cancion.getIdAlbum()));
+        boolean encuentro = false;
+
+        for (Album c : listaAlbumCompra) {
+            if (c.getIdAlbum().equals(cancion.getIdAlbum())) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "Error!", "La cancion: " + cancion.getNombreAlbum() + " pertenece a un album que ya se encuentra en el carrito"));
+                encuentro = true;
+            }
+        }
+
+        for (Usuario c : listaCancionCompra) {
+            if (c.getIdCancion().equals(cancion.getIdCancion())) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "Error!", "La cancion: " + cancion.getNombreCancion() + " ya se encuentra en el carrito"));
+                encuentro = true;
+            }
+        }
+
+        if (encuentro == false) {
+             listaCancionCompra.add(new Usuario(cancion.getIdCancion(), cancion.getNombreArtista(),
+                    cancion.getNombreAlbum(), cancion.getNombreCancion(), cancion.getDuracionCancion(),
+                    cancion.getFormato(), cancion.getPrecioCancion(), cancion.getIdAlbum()));
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                    "Añadir Cancion!", "Se agrego al carrito la cancion: " + cancion.getNombreCancion()));
+        } 
         
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, 
-                 "Añadir album!","Se agrego al carrito la cancion: "+cancion.getNombreCancion() ));
+        
     }
 
-    public void precioCompra() {
-        System.out.println("ENTRO!");
+    public int precioCompra() {
         for (Album album : listaAlbumCompra) {
-            totalCompra = totalCompra+album.getPrecioAlbum();
+            totalCompra = totalCompra + album.getPrecioAlbum();
         }
         for (Usuario cancion : listaCancionCompra) {
-            totalCompra = totalCompra+cancion.getPrecioCancion();
+            totalCompra = totalCompra + cancion.getPrecioCancion();
         }
         
-        System.out.println("ENTRO! "+totalCompra);
+        return totalCompra;
     }
-    
-    public void limpiarLista(){
+
+    public void limpiarLista() {
+        totalCompra = 0;
         listaAlbumCompra.clear();
         listaCancionCompra.clear();
-        totalCompra = 0;
     }
 
     public List<Album> getListaAlbumCompra() {
