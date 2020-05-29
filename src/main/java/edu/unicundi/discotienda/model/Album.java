@@ -10,29 +10,29 @@ package edu.unicundi.discotienda.model;
  * @author Valentina
  */
 public class Album {
-    
+
     private Integer idAlbum;
-    private String  nombreAlbum;
-    private String  fechaAlbum;
-    private String  formatoAlbum;
+    private String nombreAlbum;
+    private String fechaAlbum;
+    private String formatoAlbum;
     private Integer precioAlbum;
     private Integer idArtista;
     private Integer idGenero;
-    private String  nombreArtista;
-    private String  nombreGenero;
-    
+    private String nombreArtista;
+    private String nombreGenero;
+
     public Album() {
     }
-    
-    public Album( Integer idAlbum ,String  nombreAlbum,String nombreArtista,String nombreGenero, String formatoAlbum, String  fechaAlbum , Integer precioAlbum) {
-    this.idAlbum=idAlbum;
-    this.nombreAlbum=nombreAlbum;
-    this.fechaAlbum=fechaAlbum;
-    this.formatoAlbum=formatoAlbum;
-    this.precioAlbum=precioAlbum;
-    this.nombreArtista=nombreArtista;
-    this.nombreGenero=nombreGenero;
-    
+
+    public Album(Integer idAlbum, String nombreAlbum, String nombreArtista, String nombreGenero, String formatoAlbum, String fechaAlbum, Integer precioAlbum) {
+        this.idAlbum = idAlbum;
+        this.nombreAlbum = nombreAlbum;
+        this.fechaAlbum = fechaAlbum;
+        this.formatoAlbum = formatoAlbum;
+        this.precioAlbum = precioAlbum;
+        this.nombreArtista = nombreArtista;
+        this.nombreGenero = nombreGenero;
+
     }
 
     public Integer getIdAlbum() {
@@ -106,9 +106,9 @@ public class Album {
     public void setNombreGenero(String nombreGenero) {
         this.nombreGenero = nombreGenero;
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return this.nombreAlbum;
     }
 }

@@ -5,27 +5,32 @@
  */
 package edu.unicundi.discotienda.beans;
 
+import edu.unicundi.discotienda.beans.logica.DatosCompra;
+import edu.unicundi.discotienda.model.Album;
+import edu.unicundi.discotienda.model.Usuario;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 
 /**
  *
  * @author Valentina
  */
 @Named(value = "albumUsuario")
-@RequestScoped
+@ApplicationScoped
 public class albumUsuario {
-
+    
+    @Inject
+    private DatosCompra serviceCompra;
     /**
      * Creates a new instance of albumUsuario
      */
     public albumUsuario() {
     }
     
-    public void comprarAlbum() {
-       
-
+    public void comprarAlbum(Album artista) {
+       serviceCompra.llenarArtista(artista);
     }
     
 }
