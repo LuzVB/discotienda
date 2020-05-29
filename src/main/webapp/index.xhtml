@@ -24,7 +24,7 @@
                         <p:ajax event="rowEdit" listener="#{inicio.actualizarArtista}" update=":formularioArtista:msg"/>
                         <p:ajax event="rowEditCancel" listener="#{inicio.eliminarArtista}" update=":formularioArtista:msg"/>
 
-                        <p:column headerText="Id">
+                        <p:column headerText="Id" sortBy="#{artista.id}">
                             <p:cellEditor>
                                 <f:facet name="output">
                                     <h:outputText value="#{artista.id}" />
@@ -35,7 +35,7 @@
                             </p:cellEditor>
                         </p:column>
 
-                        <p:column headerText="Nombre">
+                        <p:column headerText="Nombre" filterBy="#{artista.nombre}" filterMatchMode="contains">
                             <p:cellEditor>
                                 <f:facet name="output">
                                     <h:outputText value="#{artista.nombre}" />
@@ -46,7 +46,7 @@
                             </p:cellEditor>
                         </p:column>
 
-                        <p:column headerText="Pais">
+                        <p:column headerText="Pais" filterBy="#{artista.pais}" filterMatchMode="contains">
                             <p:cellEditor>
                                 <f:facet name="output">
                                     <h:outputText value="#{artista.pais}" />
@@ -66,7 +66,7 @@
 
                         </p:column>
 
-                        <p:column headerText="Fecha de nacimiento">
+                        <p:column headerText="Fecha de nacimiento" sortBy="#{artista.fechaNacimiento}">
                             <p:cellEditor>
                                 <f:facet name="output">
                                     <h:outputText value="#{artista.fechaNacimiento}" />

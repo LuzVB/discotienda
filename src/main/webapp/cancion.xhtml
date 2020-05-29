@@ -29,7 +29,7 @@
                             <h:outputText value="#{artista.idCancion}" /> 
                         </p:column> 
 
-                        <p:column headerText="NombreAlbum"> 
+                        <p:column headerText="NombreAlbum" filterBy="#{artista.nombreAlbum}" filterMatchMode="contains" > 
                             <p:cellEditor> 
                                 <f:facet name="output"> 
                                     <h:outputText value="#{artista.nombreAlbum}" /> 
@@ -42,7 +42,7 @@
                             </p:cellEditor> 
                         </p:column> 
 
-                        <p:column headerText="NombreCancion"> 
+                        <p:column headerText="NombreCancion" filterBy="#{artista.nombreCancion}" filterMatchMode="contains"> 
                             <p:cellEditor> 
                                 <f:facet name="output"> 
                                     <h:outputText value="#{artista.nombreCancion}" /> 
@@ -52,7 +52,7 @@
                                 </f:facet> 
                             </p:cellEditor> 
                         </p:column> 
-                        <p:column headerText="Duracion"> 
+                        <p:column headerText="Duracion" sortBy="#{artista.duracionCancion}"> 
                             <p:cellEditor> 
                                 <f:facet name="output"> 
                                     <h:outputText value="#{artista.duracionCancion}" /> 
@@ -70,7 +70,7 @@
                                 </f:facet> 
                             </p:cellEditor> 
                         </p:column> 
-                        <p:column headerText="Precio" > 
+                        <p:column headerText="Precio" sortBy="#{artista.precioCancion}"> 
                             <p:cellEditor> 
                                 <f:facet name="output"> 
                                     <h:outputText value="#{artista.precioCancion}" >
